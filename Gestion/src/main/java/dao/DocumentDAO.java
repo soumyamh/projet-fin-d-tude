@@ -94,4 +94,44 @@ public List<Document> getByMatricule(String matricule){
 
     return list;
 }
+public void delete(int id){
+    try{
+        Connection c =DBConnection.getConnection();
+        PreparedStatement ps = c.prepareStatement("DELETE FROM document WHERE id=?");
+        ps.setInt(1, id);
+        ps.executeUpdate();
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+}
+public Document getById(int id){
+
+    Document d = null;
+
+    try{
+        Connection c = DBConnection.getConnection();
+
+        PreparedStatement ps = c.prepareStatement(
+            "SELECT * FROM document WHERE id=?"
+        );
+
+        ps.setInt(1, id);
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()){
+            d = new Document();
+
+            d.setId(rs.getInt("id"));
+            d.setMatricule(rs.getString("matricule"));
+            d.setType(rs.getString("type"));
+            d.setFileName(rs.getString("file_name"));
+        }
+
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+
+    return d;
+}
 }

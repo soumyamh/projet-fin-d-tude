@@ -139,4 +139,31 @@ public List<Absence> getByMatricule(String matricule){
 
     return list;
 }
+public Map<String,Integer> absenceParService(){
+
+Map<String,Integer> map = new LinkedHashMap<>();
+
+try{
+Connection con = DBConnection.getConnection();
+
+String sql = "SELECT e.service, COUNT(a.id) AS total "
+           + "FROM absence a JOIN employe e ON a.matricule = e.matricule "
+           + "GROUP BY e.service";
+
+PreparedStatement ps = con.prepareStatement(sql);
+ResultSet rs = ps.executeQuery();
+
+while(rs.next()){
+String service = rs.getString("service");
+int total = rs.getInt("total");
+
+map.put(service, total);
+}
+
+}catch(Exception e){
+e.printStackTrace();
+}
+
+return map;
+}
 }

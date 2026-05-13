@@ -1,8 +1,8 @@
 @charset "UTF-8";
 body{
-margin:0;
-font-family:Arial;
-background:#f4f4f4;
+    margin:0;
+    font-family:Arial;
+    background:#d6c2a1; /* beige foncé */
 }
 
 /* sidebar */
@@ -13,6 +13,8 @@ background:linear-gradient(180deg,#556B2F,#8FBC8F);
 position:fixed;
 padding:20px;
 color:white;
+overflow-y: auto; 
+    box-sizing: border-box;
 }
 
 .sidebar a{
@@ -29,11 +31,14 @@ border-radius:5px;
 }
 
 /* content */
-.content{
-margin-left:240px;
-padding:20px;
-}
 
+.content{
+    margin-left:250px;
+    padding:20px;
+}
+.content h2{
+    color:#6b3e08;
+}
 .cardBox{
 display:flex;
 gap:20px;
@@ -98,13 +103,17 @@ color:white;
 transform:scale(1.05);
 }
 
+
 .sidebar{
-width:220px;
-height:100vh;
-position:fixed;
-background:linear-gradient(135deg,#556B2F,#8FBC8F);
-padding:20px;
-color:white;
+    width:230px;
+    height:100vh;
+    position:fixed;   /* مهم بزاف */
+    left:0;
+    top:0;
+    background:linear-gradient(135deg,#556B2F,#8FBC8F);
+    padding:20px;
+    color:white;
+    z-index:1000;
 }
 
 .sidebar a{
@@ -253,4 +262,32 @@ min-height:100vh;
     background: #966d09; 
     color: white;
     transform: scale(1.05);
+}
+/* ===== PROFILE BOX ===== */
+.profileBox{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.profileImg{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid white;
+    margin-bottom:10px;
+}
+
+/* ===== NAME ===== */
+.profileBox h6{
+    margin:0;
+    font-size:14px;
+    font-weight:bold;
+    color:white;
+}
+
+/* ===== SMALL TEXT ===== */
+.profileBox small{
+    color:#e0e0e0;
+    font-size:12px;
 }

@@ -10,31 +10,32 @@ import model.Utilisateur;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest r, HttpServletResponse p)
-    throws IOException {
+	 
+	 protected void doPost(HttpServletRequest r, HttpServletResponse p)
+	    throws IOException {
 
-        String username = r.getParameter("username");
-        String password = r.getParameter("password");
+	        String username = r.getParameter("username");
+	        String password = r.getParameter("password");
 
-        UtilisateurDAO dao = new UtilisateurDAO();
-        Utilisateur user = dao.login(username, password);
+	        UtilisateurDAO dao = new UtilisateurDAO();
+	        Utilisateur user = dao.login(username, password);
 
-        if(user != null){
+	        if(user != null){
 
-           
-        	HttpSession session = r.getSession();
-        	session.setAttribute("matricule", user.getMatricule());
-            session.setAttribute("role", user.getRole());
+	           
+	        	HttpSession session = r.getSession();
+	        	session.setAttribute("matricule", user.getMatricule());
+	            session.setAttribute("role", user.getRole());
 
-           
-            if(user.getRole().equals("admin")){
-                p.sendRedirect("dashboard-rh.jsp");
-            }else{
-                p.sendRedirect("dashboard-employe.jsp");
-            }
+	           
+	            if(user.getRole().equals("RH")){
+	                p.sendRedirect("dashboard-rh.jsp");
+	            }else{
+	                p.sendRedirect("dashboard-employe.jsp");
+	            }
 
-        }else{
-            p.sendRedirect("login.jsp?error=1");
-        }
-    }
+	        }else{
+	            p.sendRedirect("login.jsp?error=1");
+	        }
+	    }
 }

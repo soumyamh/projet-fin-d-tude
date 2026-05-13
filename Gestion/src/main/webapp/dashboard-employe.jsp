@@ -1,9 +1,9 @@
-<%@ page import="model.User" %>
+<%@ page import="model.Utilisateur" %>
 <%@ page import="dao.CongeDAO,dao.AbsenceDAO,dao.DocumentDAO,dao.SalaireDAO" %>
 <%@ page import="java.util.*" %>
 
 <%
-User u = (User) session.getAttribute("user");
+Utilisateur u = (Utilisateur) session.getAttribute("Utilisateur");
 
 
 String mat = (String) session.getAttribute("matricule");
@@ -37,7 +37,7 @@ int totalSalaires = salaireDAO.getByMatricule(mat).size();
 body{
     margin:0;
     font-family:Arial;
-    background:#f4f4f4;
+    background:linear-gradient(135deg,#f5efe4,#e8dcc6);
 }
 
 /* ===== SIDEBAR ===== */
@@ -71,8 +71,7 @@ body{
 .content{
     margin-left:250px;
     padding:20px;
-    background:#f2f3f5;
-    min-height:100vh;
+    background:linear-gradient(135deg,#f5efe4,#e8dcc6);
 }
 
 /* ===== CARDS ===== */
@@ -97,23 +96,19 @@ body{
     transform:scale(1.05);
     background:linear-gradient(135deg,#3d4f20,#6e9c6e);
 }
+.bg-caramel { background: #6b3e08 !important; }
+.bg-dark-green { background: #006400 !important; }
+.bg-dark-mauve { background: #5D3954 !important; }
+.bg-dark-red { background: #8B0000 !important; }
 </style>
 
 </head>
 
 <body>
 
-<!-- ===== SIDEBAR ===== -->
-<div class="sidebar">
-<h4>Espace Employe</h4>
+<jsp:include page="sidebar-employe.jsp" />
+<jsp:include page="chatbot.jsp"/>
 
-<a href="mesInfos.jsp">Mes Infos</a>
-<a href="mesConges.jsp">Mes Conges</a>
-<a href="mesAbsences.jsp">Mes Absences</a>
-<a href="mesDocuments.jsp">Mes Documents</a>
-<a href="mesSalaires.jsp">Mes Salaires</a>
-<a href="logout.jsp">Logout</a>
-</div>
 
 <!-- ===== CONTENT ===== -->
 <div class="content">
@@ -123,17 +118,17 @@ body{
 <!-- ===== STATISTIQUES ===== -->
 <div class="cardBox">
 
-<div class="card">
+<div class="card bg-caramel">
 <h5>Mes Conges</h5>
 <h2><%=totalConges%></h2>
 </div>
 
-<div class="card">
+<div class="card bg-dark-mauve">
 <h5>Valides</h5>
 <h2><%=congesValides%></h2>
 </div>
 
-<div class="card">
+<div class="card bg-dark-red">
 <h5>Refuses</h5>
 <h2><%=congesRefuses%></h2>
 </div>
@@ -142,17 +137,17 @@ body{
 
 <div class="cardBox">
 
-<div class="card">
+<div class="card bg-dark-red">
 <h5>Mes Absences</h5>
 <h2><%=totalAbsences%></h2>
 </div>
 
-<div class="card">
+<div class="card bg-caramel">
 <h5>Mes Documents</h5>
 <h2><%=totalDocs%></h2>
 </div>
 
-<div class="card">
+<div class="card bg-dark-mauve">
 <h5>Mes Salaires</h5>
 <h2><%=totalSalaires%></h2>
 </div>

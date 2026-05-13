@@ -126,4 +126,30 @@ if(rs.next()) count = rs.getInt(1);
 }catch(Exception e){e.printStackTrace();}
 return count;
 }
+public Map<String,Integer> congeParMois(){
+
+Map<String,Integer> map = new LinkedHashMap<>();
+
+try{
+Connection con = DBConnection.getConnection();
+
+String sql = "SELECT MONTH(date_debut) AS mois, COUNT(*) AS total "
+           + "FROM conge GROUP BY mois ORDER BY mois";
+
+PreparedStatement ps = con.prepareStatement(sql);
+ResultSet rs = ps.executeQuery();
+
+while(rs.next()){
+String mois = "M" + rs.getInt("mois");
+int total = rs.getInt("total");
+
+map.put(mois, total);
+}
+
+}catch(Exception e){
+e.printStackTrace();
+}
+
+return map;
+}
 }

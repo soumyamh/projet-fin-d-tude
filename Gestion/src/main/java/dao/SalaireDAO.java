@@ -107,4 +107,30 @@ public class SalaireDAO {
 
         }catch(Exception e){ e.printStackTrace(); }
     }
+    public Map<String,Double> salaireParMois(){
+
+    	Map<String,Double> map = new LinkedHashMap<>();
+
+    	try{
+    	Connection con = DBConnection.getConnection();
+
+    	String sql = "SELECT mois, SUM(salaire_net) AS total "
+    	           + "FROM salaire GROUP BY mois ORDER BY mois";
+
+    	PreparedStatement ps = con.prepareStatement(sql);
+    	ResultSet rs = ps.executeQuery();
+
+    	while(rs.next()){
+    	String mois = "M" + rs.getInt("mois");
+    	double total = rs.getDouble("total");
+
+    	map.put(mois, total);
+    	}
+
+    	}catch(Exception e){
+    	e.printStackTrace();
+    	}
+
+    	return map;
+    	}
 }

@@ -59,7 +59,17 @@ List<Document> list = dao.getAllWithEmploye();
 <td><%=d.getType()%></td>
 
 <td>
-<a href="uploads/ <%=d.getFileName()%> " target="_blank"  class="btn-login-style" >Voir</a>
+
+<a href="uploads/<%=d.getFileName()%>" target="_blank" class="btn-login-style">
+Voir
+</a>
+
+<a href="document?action=delete&id=<%=d.getId()%>" 
+  class="btn-dark-red"
+   onclick="return confirm('Supprimer ce document ?')">
+Supprimer
+</a>
+
 </td>
 </tr>
 

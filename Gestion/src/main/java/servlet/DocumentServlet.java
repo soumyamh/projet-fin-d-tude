@@ -3,6 +3,7 @@ package servlet;
 import java.io.*;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
@@ -85,4 +86,37 @@ e.printStackTrace();
 response.getWriter().println("ERROR: " + e.getMessage());
 }
 }
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+    String action = request.getParameter("action");
+    DocumentDAO dao = new DocumentDAO();
+
+    if ("delete".equals(action)) {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        // جلب document
+        Document d = dao.getById(id);
+
+        if (d != null) {
+
+            String path = getServletContext().getRealPath("")
+                    + File.separator + "uploads"
+                    + File.separator + d.getFileName();
+
+            File file = new File(path);
+
+            if (file.exists()) {
+                file.delete();
+            }
+        }
+
+        // حذف من DB
+        dao.delete(id);
+    }
+
+    response.sendRedirect("Documents.jsp");
+}
+
 }
